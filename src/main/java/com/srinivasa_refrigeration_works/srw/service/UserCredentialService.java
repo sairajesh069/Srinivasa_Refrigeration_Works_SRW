@@ -34,4 +34,8 @@ public class UserCredentialService {
     public void addOwnerCredential(UserCredential userCredential) {
         saveCredential(userCredential, UserType.OWNER, "ROLE_OWNER"); // Assign OWNER role
     }
+
+    public void addEmployeeCredential(UserCredential userCredential) {
+        saveCredential(userCredential, UserType.EMPLOYEE, "ROLE_EMPLOYEE"); // Assign EMPLOYEE role
+    }
 }

@@ -30,3 +30,17 @@ CREATE TABLE user_roles (
     roles VARCHAR(25) NOT NULL,
     PRIMARY KEY(user_id, roles),
     FOREIGN KEY(user_id) REFERENCES user_credentials(user_id));
+    
+-- Creating the employees table
+CREATE TABLE employees (
+    employee_reference INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    first_name VARCHAR(60) NOT NULL,
+    last_name VARCHAR(60) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL UNIQUE, 
+    email VARCHAR(45) NOT NULL UNIQUE,
+    address VARCHAR(108) NOT NULL,
+    employee_id VARCHAR(10) UNIQUE,
+    designation VARCHAR(25),
+    date_of_hire VARCHAR(25) NOT NULL,
+    salary INT NOT NULL,
+    date_of_exit VARCHAR(25)) AUTO_INCREMENT=101;
