@@ -27,6 +27,6 @@ CREATE TABLE user_credentials (
 CREATE TABLE user_roles (
     user_id VARCHAR(25) NOT NULL UNIQUE,
     username VARCHAR(45) NOT NULL UNIQUE,
-    roles VARCHAR(25) NOT NULL UNIQUE,
+    roles VARCHAR(25) NOT NULL,
     PRIMARY KEY(user_id, roles),
     FOREIGN KEY(user_id) REFERENCES user_credentials(user_id));
