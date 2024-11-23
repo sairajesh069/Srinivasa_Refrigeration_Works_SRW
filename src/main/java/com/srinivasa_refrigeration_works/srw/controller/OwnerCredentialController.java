@@ -51,12 +51,12 @@ public class OwnerCredentialController {
     @PostMapping("/owner-confirmation") // Processes the owner and credential form submission
     public String confirmOwner(@ModelAttribute("ownerCredential") @Valid OwnerCredentialWrapper ownerCredential, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { // If validation errors exist, show the form again
-            return "owner-creation-form";
+            return "owner/owner-creation-form";
         }
         ownerService.addOwner(ownerCredential.getOwner()); // Add the Owner to the database
         String ownerId = ownerCredential.getOwner().getOwnerId(); // Get the owner's ID
         ownerCredential.getUserCredential().setUserId(ownerId); // Set the user credential's user ID
         userCredentialService.addOwnerCredential(ownerCredential.getUserCredential()); // Add UserCredential to the database
-        return "owner-confirmation"; // Return confirmation view after successful submission
+        return "owner/owner-confirmation"; // Return confirmation view after successful submission
     }
 }
