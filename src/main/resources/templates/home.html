@@ -16,20 +16,32 @@
         <br><br>
         <hr>
 
-        <!-- Logout form with confirmation prompt, only shown if user is authenticated -->
-        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="POST">
-            <!-- Logout button with confirmation dialog -->
-            <input 
-                class="btn btn-danger btn-sm mb-3" 
-                onclick="if(!confirm('Are you sure you want to log out?')) return false" 
-                type="submit" 
-                value="Logout" 
-                title="Click to log out from your account">
-        </form>
+        <!-- Check if user is authenticated -->
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
 
-        <!-- Login link for users who are not authenticated -->
+            <!-- Check if user has the role 'OWNER' to display registration options -->
+            <div sec:authorize="hasRole('OWNER')">
+                <!-- Button to register employee -->
+                <a th:href="@{/SRW/createEmployee}" class="btn btn-secondary btn-sm mb-3" title="Register a new employee">Register Employee</a>
+
+                <!-- Button to register owner -->
+                <a th:href="@{/SRW/createOwner}" class="btn btn-secondary btn-sm mb-3" title="Register a new owner">Register Owner</a>
+            </div>
+
+            <!-- Logout form, only visible when user is authenticated -->
+            <form th:action="@{/logout}" method="POST">
+                <!-- Logout button with a confirmation dialog -->
+                <input 
+                    class="btn btn-danger btn-sm mb-3" 
+                    onclick="if(!confirm('Are you sure you want to log out?')) return false" 
+                    type="submit" 
+                    value="Logout" 
+                    title="Click to log out from your account">
+            </form>
+        </div>
+
+        <!-- Link to login page for unauthenticated users -->
         <a th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/SRW/login}" class="btn btn-primary btn-sm mb-3" title="Navigate to the login page">Login</a>
-
 
     </body>
 </html>
