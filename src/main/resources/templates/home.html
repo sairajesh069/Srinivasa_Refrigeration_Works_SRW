@@ -16,18 +16,20 @@
         <br><br>
         <hr>
 
-        <!-- Login link for navigation -->
-        <a th:href="@{/SRW/login}" class="btn btn-primary btn-sm mb-3" title="Navigate to the login page">Login</a>
-
-        <!-- Logout form with confirmation prompt -->
-        <form th:action="@{/logout}" method="POST">
+        <!-- Logout form with confirmation prompt, only shown if user is authenticated -->
+        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="POST">
             <!-- Logout button with confirmation dialog -->
             <input 
                 class="btn btn-danger btn-sm mb-3" 
                 onclick="if(!confirm('Are you sure you want to log out?')) return false" 
                 type="submit" 
-                value="Logout">
+                value="Logout" 
+                title="Click to log out from your account">
         </form>
+
+        <!-- Login link for users who are not authenticated -->
+        <a th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/SRW/login}" class="btn btn-primary btn-sm mb-3" title="Navigate to the login page">Login</a>
+
 
     </body>
 </html>
