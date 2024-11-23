@@ -28,44 +28,44 @@
 
         <!-- First name input field with error handling -->
         <label for="firstName">First Name:</label>
-        <input type="text" th:field="*{owner.firstName}" placeholder="Enter your first name" required>
+        <input type="text" th:field="*{owner.firstName}" placeholder="Enter your first name">
         <span th:if="${#fields.hasErrors('owner.firstName')}" th:errors="*{owner.firstName}" class="error"></span> <br><br>
 
         <!-- Last name input field with error handling -->
         <label for="lastName">Last Name:</label>
-        <input type="text" th:field="*{owner.lastName}" placeholder="Enter your last name" required>
+        <input type="text" th:field="*{owner.lastName}" placeholder="Enter your last name">
         <span th:if="${#fields.hasErrors('owner.lastName')}" th:errors="*{owner.lastName}" class="error"></span> <br><br>
 
         <!-- Phone number input field with error handling -->
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" th:field="*{owner.phoneNumber}" placeholder="Enter your phone number" required>
+        <input type="text" th:field="*{owner.phoneNumber}" placeholder="Enter your phone number">
         <span th:if="${#fields.hasErrors('owner.phoneNumber')}" th:errors="*{owner.phoneNumber}" class="error"></span> <br><br>
 
         <!-- Email input field with error handling -->
         <label for="email">Email:</label>
-        <input type="email" th:field="*{owner.email}" placeholder="Enter your email" required>
+        <input type="email" th:field="*{owner.email}" placeholder="Enter your email">
         <span th:if="${#fields.hasErrors('owner.email')}" th:errors="*{owner.email}" class="error"></span> <br><br>
 
         <!-- Address input field with error handling -->
         <label for="address">Address:</label>
-        <input type="text" th:field="*{owner.address}" placeholder="Enter your address" required>
+        <input type="text" th:field="*{owner.address}" placeholder="Enter your address">
         <span th:if="${#fields.hasErrors('owner.address')}" th:errors="*{owner.address}" class="error"></span> <br><br> <hr>
 
         <h4>Enter Your Credentials</h4> <br>
 
         <!-- Username input field with error handling -->
         <label for="username">Username:</label>
-        <input type="text" th:field="*{userCredential.username}" placeholder="Enter your username" required>
+        <input type="text" th:field="*{userCredential.username}" placeholder="Enter your username">
         <span th:if="${#fields.hasErrors('userCredential.username')}" th:errors="*{userCredential.username}" class="error"></span> <br><br>
 
         <!-- Password input field with error handling -->
         <label for="password">Password:</label>
-        <input type="password" th:field="*{userCredential.password}" placeholder="Enter your password" required>
+        <input type="password" th:field="*{userCredential.password}" placeholder="Enter your password">
         <span th:if="${#fields.hasErrors('userCredential.password')}" th:errors="*{userCredential.password}" class="error"></span> <br><br>
 
         <!-- Confirm password input field with error handling -->
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" th:field="*{userCredential.confirmPassword}" placeholder="Confirm your password" required>
+        <input type="password" th:field="*{userCredential.confirmPassword}" placeholder="Confirm your password">
         <span th:if="${#fields.hasErrors('userCredential.confirmPassword')}" th:errors="*{userCredential.confirmPassword}" class="error"></span> <br><br>
 
         <!-- Submit button for account creation -->
