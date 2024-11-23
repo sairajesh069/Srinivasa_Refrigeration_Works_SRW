@@ -16,11 +16,18 @@
         <br><br>
         <hr>
 
-        <!-- Login Button with brief description -->
-        <a href="#" class="btn btn-primary btn-sm mb-3" title="Click to login to your account">Login</a>
-        <br><br>
+        <!-- Login link for navigation -->
+        <a th:href="@{/SRW/login}" class="btn btn-primary btn-sm mb-3" title="Navigate to the login page">Login</a>
 
-        <!-- Logout Button with brief description -->
-        <a href="#" class="btn btn-danger btn-sm mb-3" title="Click to logout from your account">Logout</a>
+        <!-- Logout form with confirmation prompt -->
+        <form th:action="@{/logout}" method="POST">
+            <!-- Logout button with confirmation dialog -->
+            <input 
+                class="btn btn-danger btn-sm mb-3" 
+                onclick="if(!confirm('Are you sure you want to log out?')) return false" 
+                type="submit" 
+                value="Logout">
+        </form>
+
     </body>
 </html>
