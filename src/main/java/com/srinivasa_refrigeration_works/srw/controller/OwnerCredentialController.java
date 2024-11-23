@@ -3,7 +3,9 @@ package com.srinivasa_refrigeration_works.srw.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import com.srinivasa_refrigeration_works.srw.entity.Owner;
 import com.srinivasa_refrigeration_works.srw.entity.UserCredential;
 import com.srinivasa_refrigeration_works.srw.service.OwnerService;
 import com.srinivasa_refrigeration_works.srw.service.UserCredentialService;
+import com.srinivasa_refrigeration_works.srw.utility.StringTrimmer;
 import com.srinivasa_refrigeration_works.srw.wrapper.OwnerCredentialWrapper;
 
 import jakarta.validation.Valid;
@@ -22,11 +25,18 @@ public class OwnerCredentialController {
 
     private final OwnerService ownerService; // Service for handling Owner operations
     private final UserCredentialService userCredentialService; // Service for handling UserCredential operations
+    private final StringTrimmer stringTrimmer; // Utility for trimming strings
 
     // Constructor injection for required services
-    public OwnerCredentialController(OwnerService ownerService, UserCredentialService userCredentialService) {
+    public OwnerCredentialController(OwnerService ownerService, UserCredentialService userCredentialService, StringTrimmer stringTrimmer) {
         this.ownerService = ownerService;
         this.userCredentialService = userCredentialService;
+        this.stringTrimmer = stringTrimmer;
+    }
+
+    @InitBinder
+    public void initialize(WebDataBinder webDataBinder) {
+        stringTrimmer.initBinder(webDataBinder); // Trims strings to remove leading/trailing spaces
     }
 
     @GetMapping("/owner-register") // Displays the form for creating an owner
