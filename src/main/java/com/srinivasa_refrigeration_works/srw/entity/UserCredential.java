@@ -3,6 +3,7 @@ package com.srinivasa_refrigeration_works.srw.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.srinivasa_refrigeration_works.srw.validation.FieldMatch;
 import com.srinivasa_refrigeration_works.srw.validation.UniqueValue;
 
 import jakarta.persistence.CascadeType;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_credentials") // Maps this class to the "user_credentials" table
 @Data // Lombok annotation to generate getters, setters, equals, hashCode, and toString
 @NoArgsConstructor // Lombok annotation to generate a no-argument constructor
+@FieldMatch(firstField = "password", secondField = "confirmPassword", message = "The passwords do not match. Please try again.") // Custom validation to ensure password and confirmPassword fields match
 public class UserCredential {
 
     // Enum for user types
