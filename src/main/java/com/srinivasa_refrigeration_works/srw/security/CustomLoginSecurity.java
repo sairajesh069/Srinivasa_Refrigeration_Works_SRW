@@ -1,44 +1,61 @@
 package com.srinivasa_refrigeration_works.srw.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+@Configuration // Marks this class as a configuration class
 public class CustomLoginSecurity {
 
-    // Defines in-memory user details for authentication
+    // Bean to configure the userDetailsManager using JdbcUserDetailsManager
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails user = User.builder()
-                                .username("sai") // Username
-                                .password("{noop}1234") // Password
-                                .roles("USER") // Role assigned to the user
-                                .build();
-        return new InMemoryUserDetailsManager(user);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+        
+        // Custom query to retrieve user details by username
+        String usersByUserNameQuery = """
+                SELECT username, password, enabled
+                FROM user_credentials
+                WHERE username=?;
+                """;
+
+        // Custom query to retrieve user authorities (roles) by username
+        String authoritiesByUserNameQuery = """
+                SELECT username, roles
+                FROM user_roles 
+                WHERE username=?;
+                """;
+
+        userDetailsManager.setUsersByUsernameQuery(usersByUserNameQuery);
+        userDetailsManager.setAuthoritiesByUsernameQuery(authoritiesByUserNameQuery);
+
+        return userDetailsManager; // Return the userDetailsManager bean
     }
 
-    // Configures the security filter chain
+    // Bean to configure the security filter chain for HTTP security
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
         return security
-                // Allows static resources without authentication
+                // Configure which requests are allowed without authentication
                 .authorizeHttpRequests(configurer -> configurer
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Static resources
+                        .requestMatchers("/", "/SRW/home").permitAll() // Home page is accessible to all
+                        .requestMatchers("/SRW/owner-register", "/SRW/owner-confirmation").permitAll() // Temporary permission for owner creation
                         .anyRequest()
                         .authenticated()) // All other requests require authentication
-                // Configures custom login page
+                // Configure custom login page
                 .formLogin(form -> form
                         .loginPage("/SRW/login") // Custom login page URL
-                        .loginProcessingUrl("/authenticateUser") // URL for login processing
-                        .permitAll()) // Login page is accessible to all
-                // Configures logout behavior
+                        .loginProcessingUrl("/authenticateUser") // URL for processing the login form
+                        .permitAll()) // The login page is accessible to everyone
+                // Configure logout behavior
                 .logout(logout -> logout
-                        .permitAll()) // Logout endpoint is accessible to all
-                .build();
+                        .permitAll()) // Logout is accessible to everyone
+                .build(); // Build the security filter chain
     }
 }
