@@ -45,7 +45,6 @@ public class CustomLoginSecurity {
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Static resources
                         .requestMatchers("/", "/SRW/home").permitAll() // Home page is accessible to all
-                        .requestMatchers("/SRW/owner-register", "/SRW/owner-confirmation").permitAll() // Temporary permission for owner creation
                         .anyRequest()
                         .authenticated()) // All other requests require authentication
                 // Configure custom login page
