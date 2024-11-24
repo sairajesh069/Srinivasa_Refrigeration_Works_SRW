@@ -45,6 +45,7 @@ public class CustomLoginSecurity {
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Static resources
                         .requestMatchers("/", "/SRW/home").permitAll() // Home page is accessible to all
+                        .requestMatchers("SRW/customer-register", "SRW/customer-confirmation").permitAll() // Customer creation and confirmation pages are accessible to all
                         .anyRequest()
                         .authenticated()) // All other requests require authentication
                 // Configure custom login page
