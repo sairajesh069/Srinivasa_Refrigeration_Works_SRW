@@ -63,7 +63,7 @@ public class CustomerCredentialController {
 
     // Handle customer form submission and create customer with credentials
     @PostMapping("/customer-confirmation")
-    public String createCustomer(@ModelAttribute("customerCredential") @Valid CustomerCredentialWrapper customerCredential, BindingResult bindingResult) {
+    public String confirmCustomer(@ModelAttribute("customerCredential") @Valid CustomerCredentialWrapper customerCredential, BindingResult bindingResult) {
         // Check for validation errors
         if(bindingResult.hasErrors()) {
             return "customer/customer-creation-form"; // Return to form if there are errors
@@ -78,7 +78,7 @@ public class CustomerCredentialController {
 
         // Use phone number as the password for the user credential
         String phoneNumber = customerCredential.getCustomer().getPhoneNumber();
-        customerCredential.getUserCredential().setPassword(phoneNumber);
+        customerCredential.getUserCredential().setPhoneNumber(phoneNumber);
 
         // Add user credential to the database
         userCredentialService.addCustomerCredential(customerCredential.getUserCredential());
