@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Meta tags for character set and responsive design -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap CSS for styling -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/user-creation-form.css}">
+
+        <title>Srinivasa Refrigeration Works</title>
+    </head>
+    <body>
+        <!-- Main heading for the page -->
+        <h3>Create an account</h3>
+
+        <h4>Register yourself</h4>
+
+        <i class="required">All fields are required</i> <br> <hr>
+
+        <!-- Employee registration form -->
+        <form th:action="@{/SRW/employee-confirmation}" th:object="${employeeCredential}" method="POST">
+
+            <!-- Section for employee details -->
+            <h4>Enter your details</h4> <br>
+
+            <!-- First Name input field with error handling -->
+            <label for="firstName">First name:</label>
+            <input type="text" th:field="*{employee.firstName}" placeholder="Enter first name">
+            <span th:if="${#fields.hasErrors('employee.firstName')}" th:errors="*{employee.firstName}" class="error"></span> <br><br>
+
+            <!-- Last Name input field with error handling -->
+            <label for="lastName">Last name:</label>
+            <input type="text" th:field="*{employee.lastName}" placeholder="Enter last name">
+            <span th:if="${#fields.hasErrors('employee.lastName')}" th:errors="*{employee.lastName}" class="error"></span> <br><br>
+
+            <!-- Phone Number input field with error handling -->
+            <label for="phoneNumber">Phone number:</label>
+            <input type="text" th:field="*{employee.phoneNumber}" placeholder="Enter phone number">
+            <span th:if="${#fields.hasErrors('employee.phoneNumber')}" th:errors="*{employee.phoneNumber}" class="error"></span> <br><br>
+
+            <!-- Email input field with error handling -->
+            <label for="email">Email:</label>
+            <input type="text" th:field="*{employee.email}" placeholder="Enter email">
+            <span th:if="${#fields.hasErrors('employee.email')}" th:errors="*{employee.email}" class="error"></span> <br><br>
+
+            <!-- Address input field with error handling -->
+            <label for="address">Address:</label>
+            <input type="text" th:field="*{employee.address}" placeholder="Enter address">
+            <span th:if="${#fields.hasErrors('employee.address')}" th:errors="*{employee.address}" class="error"></span> <br><br>
+
+            <!-- Designation input field with error handling -->
+            <label for="designation">Designation:</label>
+            <input type="text" th:field="*{employee.designation}" placeholder="Enter designation">
+            <span th:if="${#fields.hasErrors('employee.designation')}" th:errors="*{employee.designation}" class="error"></span> <br><br>
+
+            <!-- Salary input field with error handling -->
+            <label for="salary">Salary:</label>
+            <input type="text" th:field="*{employee.salary}" placeholder="Enter salary">
+            <span th:if="${#fields.hasErrors('employee.salary')}" th:errors="*{employee.salary}" class="error"></span> <br><br> <hr>
+
+            <!-- Section for user credentials -->
+            <h4>Enter your credentials</h4> <br>
+
+            <!-- Username input field with error handling -->
+            <label for="username">Username:</label>
+            <input type="text" th:field="*{userCredential.username}" placeholder="Enter your username">
+            <span th:if="${#fields.hasErrors('userCredential.username')}" th:errors="*{userCredential.username}" class="error"></span> <br><br>
+
+            <!-- Passwordinput field with error handling -->
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{userCredential.password}" placeholder="Enter your password">
+            <span th:if="${#fields.hasErrors('userCredential.password')}" th:errors="*{userCredential.password}" class="error"></span> <br><br>
+
+            <!-- Confirm Password input field with error handling -->
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" th:field="*{userCredential.confirmPassword}" placeholder="Confirm your password">
+            <span th:if="${#fields.hasErrors('userCredential.confirmPassword')}" th:errors="*{userCredential.confirmPassword}" class="error"></span> <br><br>
+
+            <!-- Submit button for account creation -->
+            <input type="submit" class="btn btn-primary btn-sm mb-3" value="Create account"> <br><br>
+
+        </form>
+
+        <!-- Button to go back to home -->
+        <a th:href="@{/SRW/home}" class="btn btn-primary btn-sm mb-3">Back to home</a>
+
+    </body>
+</html>
