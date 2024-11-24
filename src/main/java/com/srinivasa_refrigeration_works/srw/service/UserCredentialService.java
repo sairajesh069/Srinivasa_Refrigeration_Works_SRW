@@ -38,4 +38,8 @@ public class UserCredentialService {
     public void addEmployeeCredential(UserCredential userCredential) {
         saveCredential(userCredential, UserType.EMPLOYEE, "ROLE_EMPLOYEE"); // Assign EMPLOYEE role
     }
+
+    public void addCustomerCredential(UserCredential userCredential) {
+        saveCredential(userCredential, UserType.CUSTOMER, "ROLE_CUSTOMER"); // Assign CUSTOMER role
+    }
 }
