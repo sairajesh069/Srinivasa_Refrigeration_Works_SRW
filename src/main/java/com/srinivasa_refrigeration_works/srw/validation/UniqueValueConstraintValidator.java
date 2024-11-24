@@ -12,6 +12,7 @@ public class UniqueValueConstraintValidator implements ConstraintValidator<Uniqu
 
     private String fieldName; // Field to be validated
     private Class<?> entityClass; // Entity class for the validation
+    private boolean inEveryUserEntity; // Flag to determine cross-entity validation
 
     @PersistenceContext // Injects the EntityManager to interact with the database
     private EntityManager entityManager;
@@ -21,6 +22,7 @@ public class UniqueValueConstraintValidator implements ConstraintValidator<Uniqu
     public void initialize(UniqueValue uniqueValue) {
         this.fieldName = uniqueValue.fieldName();
         this.entityClass = uniqueValue.entityClass();
+        this.inEveryUserEntity = uniqueValue.inEveryUserEntity();
     }
 
     // Validates that the value of the field is unique in the database
@@ -38,8 +40,24 @@ public class UniqueValueConstraintValidator implements ConstraintValidator<Uniqu
             value = value.toString().startsWith("+91") ? value : "+91" + value;
         }
 
-        // Constructs a query to count records with the same value in the specified field
-        String query = "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
+        // Query to check across all user-related entities if applicable
+        String everyUserQuery = """
+                                SELECT COUNT(e.dynamic_field) 
+                                FROM (
+                                    SELECT %s AS dynamic_field FROM Owner
+                                    UNION
+                                    SELECT %s AS dynamic_field FROM Employee
+                                    UNION
+                                    SELECT %s AS dynamic_field FROM Customer
+                                ) e
+                                WHERE e.dynamic_field = :value
+                            """.formatted(fieldName, fieldName, fieldName);
+
+        // Query to check within a single entity
+        String singleUserQuery = "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
+
+        // Choose query based on the inEveryUserEntity flag
+        String query = inEveryUserEntity ? everyUserQuery : singleUserQuery;
         
         // Executes the query and checks if any record exists with the same value
         Long count = entityManager

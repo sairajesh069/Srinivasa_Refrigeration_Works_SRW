@@ -43,7 +43,7 @@ public class UserCredential {
 
     @NotNull(message = "Username is required") // Validation for non-null username
     @Size(min = 6, message = "Username must be at least 6 characters long") // Username length validation
-    @UniqueValue(entityClass = UserCredential.class, fieldName = "username", message = "This username is already taken") // Custom uniqueness validation
+    @UniqueValue(entityClass = UserCredential.class, fieldName = "username", inEveryUserEntity=false, message = "This username is already taken") // Validates that the username is unique within the UserCredential entity
     @Column(name = "username") // Maps to "username" column
     private String username;
 

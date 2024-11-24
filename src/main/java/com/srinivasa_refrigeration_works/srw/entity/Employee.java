@@ -40,14 +40,14 @@ public class Employee {
     // Phone number with validation for format and uniqueness
     @NotNull(message = "Phone number is required.")
     @Pattern(regexp = "^[0-9+]{10,13}$", message = "Please enter a valid phone number.")
-    @UniqueValue(fieldName = "phoneNumber", entityClass = Employee.class, message = "Phone number already in use.")
+    @UniqueValue(fieldName = "phoneNumber", entityClass = Employee.class, inEveryUserEntity=true, message = "Phone number already in use.") // Ensures the phone number is unique across all user-related entities
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
     // Email address with validation for format and uniqueness
     @NotNull(message = "Email is required.")
     @Email(message = "Please enter a valid email address.")
-    @UniqueValue(fieldName = "email", entityClass = Employee.class, message = "Email already in use.")
+    @UniqueValue(fieldName = "email", entityClass = Employee.class, inEveryUserEntity=true, message = "Email already in use.") // Ensures the email is unique across all user-related entities
     @Column(name = "email", unique = true)
     private String email;
 
