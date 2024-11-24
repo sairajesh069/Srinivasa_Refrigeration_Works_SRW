@@ -57,8 +57,10 @@ public class EmployeeCredentialController {
             return "employee/employee-creation-form"; // Return to form if there are errors
         }
         employeeService.addEmployee(employeeCredential.getEmployee()); // Save employee details
-        String employeeId = employeeCredential.getEmployee().getEmployeeId();
+        String employeeId = employeeCredential.getEmployee().getEmployeeId(); // Get the employee's ID
         employeeCredential.getUserCredential().setUserId(employeeId); // Link employee ID to user credentials
+        String phoneNumber = employeeCredential.getEmployee().getPhoneNumber(); // Get the employee's phone number
+        employeeCredential.getUserCredential().setPhoneNumber(phoneNumber); // Set the user credential's phone number
         userCredentialService.addEmployeeCredential(employeeCredential.getUserCredential()); // Save user credentials
         return "employee/employee-confirmation"; // Confirmation view after successful submission
     }
