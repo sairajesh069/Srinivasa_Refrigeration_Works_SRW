@@ -44,3 +44,14 @@ CREATE TABLE employees (
     date_of_hire VARCHAR(25) NOT NULL,
     salary INT NOT NULL,
     date_of_exit VARCHAR(25)) AUTO_INCREMENT=101;
+    
+-- Creating the customers table
+CREATE TABLE customers (
+    customer_reference INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    first_name VARCHAR(60) NOT NULL,
+    last_name VARCHAR(60) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL UNIQUE, 
+    email VARCHAR(45) NOT NULL UNIQUE,
+    address VARCHAR(108) NOT NULL,
+    customer_id VARCHAR(10) UNIQUE,
+    enrollment_date VARCHAR(25) NOT NULL) AUTO_INCREMENT=1001;
