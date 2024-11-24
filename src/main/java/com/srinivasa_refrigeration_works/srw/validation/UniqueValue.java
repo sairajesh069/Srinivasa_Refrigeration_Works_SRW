@@ -28,4 +28,7 @@ public @interface UniqueValue {
 
     // Specifies the entity class to validate against
     Class<?> entityClass();
+
+    // Flag to indicate whether the field value should be unique across all user-related entities (Owner, Employee, Customer)
+    boolean inEveryUserEntity();
 }

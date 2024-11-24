@@ -35,13 +35,13 @@ public class Owner {
 
     @NotNull(message = "Phone number is mandatory") // Validation for non-null phone number
     @Pattern(regexp = "^[0-9+]{10,13}$", message = "Please enter a valid phone number") // Phone number format validation
-    @UniqueValue(fieldName = "phoneNumber", entityClass = Owner.class, message = "This phone number is already registered") // Custom uniqueness validation
+    @UniqueValue(fieldName = "phoneNumber", entityClass = Owner.class, inEveryUserEntity=true, message = "This phone number is already registered") // Ensures the phone number is unique across all user-related entities
     @Column(name = "phone_number", unique = true) // Unique constraint for "phone_number"
     private String phoneNumber;
 
     @NotNull(message = "Email is mandatory") // Validation for non-null email
     @Email(message = "Please enter a valid email address") // Email format validation
-    @UniqueValue(fieldName = "email", entityClass = Owner.class, message = "This email address is already registered") // Custom uniqueness validation
+    @UniqueValue(fieldName = "email", entityClass = Owner.class, inEveryUserEntity=true, message = "This email address is already registered") // Ensures the email is unique across all user-related entities
     @Column(name = "email") // Maps to "email" column
     private String email;
 
