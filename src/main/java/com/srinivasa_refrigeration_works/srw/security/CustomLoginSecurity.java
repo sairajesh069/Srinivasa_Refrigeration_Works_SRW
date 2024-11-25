@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -37,6 +38,11 @@ public class CustomLoginSecurity {
         return userDetailsManager; // Return the userDetailsManager bean
     }
 
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        return new CustomRoleHierarchy(); // Returns a custom implementation of RoleHierarchy, which defines the role hierarchy for user permissions
+    }
+
     // Bean to configure the security filter chain for HTTP security
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
@@ -46,6 +52,8 @@ public class CustomLoginSecurity {
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Static resources
                         .requestMatchers("/", "/SRW/home").permitAll() // Home page is accessible to all
                         .requestMatchers("SRW/customer-register", "SRW/customer-confirmation").permitAll() // Customer creation and confirmation pages are accessible to all
+                        .requestMatchers("/SRW/owner-register", "/SRW/owner-confirmation").hasRole("OWNER")  // Restrict access to these URLs to users who have the "OWNER" role
+                        .requestMatchers("/SRW/employee-register", "/SRW/employee-confirmation").hasRole("EMPLOYEE")  // Restrict access to these URLs to users who have the "EMPLOYEE" role
                         .anyRequest()
                         .authenticated()) // All other requests require authentication
                 // Configure custom login page
@@ -56,6 +64,7 @@ public class CustomLoginSecurity {
                 // Configure logout behavior
                 .logout(logout -> logout
                         .permitAll()) // Logout is accessible to everyone
+                .exceptionHandling(customizer -> customizer.accessDeniedPage("/SRW/access-denied"))  // Customize the access-denied page URL to redirect unauthorized users to "/SRW/access-denied"
                 .build(); // Build the security filter chain
     }
 }
