@@ -48,7 +48,7 @@ public class UserCredential {
     private String username;
 
     @NotNull(message = "Password is required") // Validation for non-null password
-    @Pattern(regexp = "^[a-zA-Z0-9@.#$&{}]{8,}$", message = "Password must be at least 8 characters long and can include digits, letters, and special characters (. @ # $ & {}) only") // Password format validation
+    @Pattern(regexp = "^[a-zA-Z0-9@.#$&{}]{8,}$|^\\$2[ayb]\\$.{56}$", message = "Password must be at least 8 characters long and can include digits, letters, and special characters (. @ # $ & {}) only") // Password format validation
     @Column(name = "password") // Maps to "password" column
     private String password;
 
