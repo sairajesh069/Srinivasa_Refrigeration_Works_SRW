@@ -1,5 +1,6 @@
 package com.srinivasa_refrigeration_works.srw.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.srinivasa_refrigeration_works.srw.entity.UserCredential;
@@ -12,15 +13,20 @@ public class UserCredentialService {
 
     private final UserCredentialRepository userCredentialRepository; // Repository for UserCredential entity
 
-    // Constructor injection for UserCredentialRepository
-    public UserCredentialService(UserCredentialRepository userCredentialRepository) {
+    private final PasswordEncoder passwordEncoder; // Instance of PasswordEncoder to handle password encryption
+
+    // Constructor injection for UserCredentialRepository and PasswordEncoder
+    public UserCredentialService(UserCredentialRepository userCredentialRepository, PasswordEncoder passwordEncoder) {
         this.userCredentialRepository = userCredentialRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Method to save a user's credentials with role and user type
     public void saveCredential(UserCredential userCredential, UserType userType, String role) {
         userCredential.setUserType(userType); // Set the user type (OWNER, EMPLOYEE, CUSTOMER)
-        userCredential.setPassword("{noop}" + userCredential.getPassword()); // Set password with no encryption (noop)
+
+        String encodedPassword = passwordEncoder.encode(userCredential.getPassword());
+        userCredential.setPassword(encodedPassword); // Set password after bcrypt encryption
         
         // Create a new UserRole and associate it with the UserCredential
         UserRole userRole = new UserRole(userCredential.getUsername(), role);

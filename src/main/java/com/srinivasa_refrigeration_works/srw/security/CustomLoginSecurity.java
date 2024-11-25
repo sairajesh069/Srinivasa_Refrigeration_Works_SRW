@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -38,9 +40,16 @@ public class CustomLoginSecurity {
         return userDetailsManager; // Return the userDetailsManager bean
     }
 
+    // Bean to configure and provide a custom RoleHierarchy implementation 
     @Bean
     public RoleHierarchy roleHierarchy() {
         return new CustomRoleHierarchy(); // Returns a custom implementation of RoleHierarchy, which defines the role hierarchy for user permissions
+    }
+
+    // Bean to provide a BCryptPasswordEncoder for password hashing
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // Returns a new BCryptPasswordEncoder instance for password encoding
     }
 
     // Bean to configure the security filter chain for HTTP security

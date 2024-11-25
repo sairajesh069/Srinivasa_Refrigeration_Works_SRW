@@ -19,7 +19,7 @@ CREATE TABLE user_credentials (
     user_id VARCHAR(25) NOT NULL UNIQUE PRIMARY KEY,
     phone_number VARCHAR(15) NOT NULL UNIQUE,
     username VARCHAR(45) NOT NULL UNIQUE,
-    password VARCHAR(25) NOT NULL,
+    password VARCHAR(68) NOT NULL,
     enabled TINYINT NOT NULL,
     user_type ENUM('OWNER', 'EMPLOYEE', 'CUSTOMER') NOT NULL);
     
