@@ -59,6 +59,7 @@ CREATE TABLE customers (
 -- Creating the complaints table
 CREATE TABLE complaints (
     complaint_reference INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+<<<<<<< HEAD
     booked_by_id VARCHAR(25),
     customer_name VARCHAR(60) NOT NULL,
     contact_number VARCHAR(15) NOT NULL, 
@@ -68,6 +69,15 @@ CREATE TABLE complaints (
     brand VARCHAR(45) NOT NULL,
     model VARCHAR(45) NOT NULL,
     description VARCHAR(256) NOT NULL,
+=======
+    user_id VARCHAR(25),
+    customer_name VARCHAR(60) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL, 
+    email VARCHAR(45) NOT NULL,
+    address VARCHAR(108) NOT NULL,
+    repair_type VARCHAR(32) NOT NULL,
+    complaint_description VARCHAR(256) NOT NULL,
+>>>>>>> 1a1dadb (feat: add Complaint entity and its repository)
     created_at VARCHAR(25) NOT NULL,
     complaint_id VARCHAR(10) UNIQUE,
     status ENUM('OPEN', 'IN_PROGRESS', 'RESOLVED') NOT NULL,
