@@ -21,29 +21,31 @@
         <form th:action="@{/authenticateUser}" method="POST">
             <!-- Error message for invalid credentials -->
             <span th:if="${param.error}">
-                <i class="error">Invalid username/password.</i>
-                <br><br>
+                <i class="error">Invalid username/password.</i> <br><br>
             </span>
 
             <!-- Success message after logout -->
             <span th:if="${param.logout}">
-                <i class="success">Logged out successfully.</i>
-                <br><br>
+                <i class="success">Logged out successfully.</i> <br><br>
             </span>
 
             <!-- Username input field -->
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-            <br><br>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required> <br><br>
 
             <!-- Password input field -->
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            <br><br>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required> <br><br>
 
             <!-- Submit button -->
             <input type="submit" value="Login" class="btn btn-primary btn-sm mb-3">
         </form>
+
+        <!-- Link to navigate to the page for forgotten username -->
+        <a th:href="@{/SRW/username-recovery}">Forgot username</a> 
+
+        <!-- Link to navigate to the page for resetting the password -->
+        <a th:href="@{/SRW/password-reset}">Forgot password</a> <br><br>
 
         <!-- Link to the customer registration page -->
         <a th:href="@{/SRW/customer-register}" class="btn btn-secondary btn-sm mb-3">Create account</a>
