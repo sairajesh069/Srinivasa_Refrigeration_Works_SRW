@@ -60,7 +60,8 @@ public class CustomLoginSecurity {
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Static resources
                         .requestMatchers("/", "/SRW/home").permitAll() // Home page is accessible to all
-                        .requestMatchers("SRW/customer-register", "SRW/customer-confirmation").permitAll() // Customer creation and confirmation pages are accessible to all
+                        .requestMatchers("/SRW/customer-register", "/SRW/customer-confirmation").permitAll() // Customer creation and confirmation pages are accessible to all
+                        .requestMatchers("/SRW/username-recovery", "/SRW/password-reset").permitAll() // username recovery and password reset pages are accessible to all
                         .requestMatchers("/SRW/owner-register", "/SRW/owner-confirmation").hasRole("OWNER")  // Restrict access to these URLs to users who have the "OWNER" role
                         .requestMatchers("/SRW/employee-register", "/SRW/employee-confirmation").hasRole("EMPLOYEE")  // Restrict access to these URLs to users who have the "EMPLOYEE" role
                         .anyRequest()
