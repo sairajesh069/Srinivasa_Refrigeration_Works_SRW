@@ -1,5 +1,7 @@
 package com.srinivasa_refrigeration_works.srw.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.srinivasa_refrigeration_works.srw.entity.Complaint;
@@ -24,4 +26,10 @@ public class ComplaintService {
         complaint.setComplaintId(complaintId); // Set the generated complaint ID
         complaintRepository.save(complaint); // Save complaint again with ID
     }
+
+    // Retrieves a list of complaints based on the userId (who booked them)
+    public List<Complaint> getComplaintsByUserId(String userId) {
+        return complaintRepository.findAllByBookedById(userId); // Fetch complaints from the repository using userId
+    }
+    
 }

@@ -116,4 +116,19 @@ public class ComplaintController {
         populateDropDowns(serviceType, model); // Populate dropdowns based on service type
         return "complaint/complaint-register-form"; // Return the form view with updated dropdowns
     }
+
+    // Fetches and displays complaints registered by the current user
+    @GetMapping("/complaint-status")
+    public String complaintStatus(Model model, Principal principal) {
+        String userId = userCredentialService.getUserIdByUsername(principal.getName()); // Get userId from username
+        List<Complaint> complaints = complaintService.getComplaintsByUserId(userId); // Retrieve complaints by userId
+        if(complaints.isEmpty()) { // If no complaints are found, show a message
+            model.addAttribute("noRecordsFound", "You have not registered any complaints.");
+        }
+        else { // If complaints are found, add them to the model
+            model.addAttribute("complaints", complaints); // Add complaints to the model
+        }
+        return "complaint/complaint-status"; // Return the view for complaint status
+    }
+    
 }

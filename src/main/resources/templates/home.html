@@ -17,6 +17,9 @@
         <!-- Button to navigate to the complaint registration page for booking a repair -->
         <a th:href="@{/SRW/complaint-register}" class="btn btn-primary btn-sm mb-3">Register Complaint</a> <br><br>
 
+        <!-- Button to navigate to the complaint status check page for a repair -->
+        <a th:href="@{/SRW/complaint-status}" class="btn btn-primary btn-sm mb-3">Complaint Status</a> <br><br>
+
         <!-- Check if user is authenticated -->
         <div th:if="${#authorization.expression('isAuthenticated()')}">
 
