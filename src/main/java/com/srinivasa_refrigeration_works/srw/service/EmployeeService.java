@@ -1,5 +1,7 @@
 package com.srinivasa_refrigeration_works.srw.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.srinivasa_refrigeration_works.srw.entity.Employee;
@@ -22,4 +24,10 @@ public class EmployeeService {
         employee.setEmployeeId("SRW" + String.format("%04d", employee.getEmployeeReference())); // Generate employee ID
         employeeRepository.save(employee); // Save employee with employee ID
     }
+
+    // Retrieves all employees from the database
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll(); // Fetches all Employee records from the repository
+    }
+
 }
