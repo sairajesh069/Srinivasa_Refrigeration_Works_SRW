@@ -17,5 +17,11 @@ public class HomeController {
     public String home() {
         return "home"; // Returns the "home" view
     }    
+
+    // Displays the "management-portal" view
+    @GetMapping("SRW/management-portal")
+    public String managementPortal() {
+        return "management-portal"; // Returns the "management-portal" view
+    }
     
 }
