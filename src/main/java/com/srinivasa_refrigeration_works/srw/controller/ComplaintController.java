@@ -128,7 +128,7 @@ public class ComplaintController {
         else { // If complaints are found, add them to the model
             model.addAttribute("complaints", complaints); // Add complaints to the model
         }
-        return "complaint/complaint-status"; // Return the view for complaint status
+        return "complaint/complaint-list"; // Return the view for complaint status
     }
     
 }
