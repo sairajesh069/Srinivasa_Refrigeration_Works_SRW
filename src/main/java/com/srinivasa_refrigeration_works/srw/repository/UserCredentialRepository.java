@@ -27,4 +27,8 @@ public interface UserCredentialRepository extends JpaRepository<UserCredential, 
     // Update the password for a specific user identified by the username
     public void updatePassword(@Param("username") String username, @Param("password") String password);
 
+    @Query("SELECT userId FROM UserCredential WHERE username = :username")
+    // Custom query to find the userId associated with a given username
+    public String findUserIdByUsername(@Param("username") String username);
+
 }

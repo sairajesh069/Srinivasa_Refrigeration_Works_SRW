@@ -51,8 +51,7 @@ public class UserCredentialService {
 
     // Method to retrieve the username based on the user's phone number
     public String getUsernameByPhoneNumber(String phoneNumber) {
-        String username = userCredentialRepository.findUsernameByPhoneNumber(phoneNumber);
-        return username;
+        return userCredentialRepository.findUsernameByPhoneNumber(phoneNumber);
     }
 
     // Method to validate if a user exists with the given phone number and username
@@ -64,5 +63,10 @@ public class UserCredentialService {
     public void updatePassword(String username, String password) {
         password = passwordEncoder.encode(password); // Encrypt the new password
         userCredentialRepository.updatePassword(username, password); // Update the password in the database
+    }
+
+    // Method to retrieve the userId based on the user's username
+    public String getUserIdByUsername(String username) {
+        return userCredentialRepository.findUserIdByUsername(username);
     }
 }

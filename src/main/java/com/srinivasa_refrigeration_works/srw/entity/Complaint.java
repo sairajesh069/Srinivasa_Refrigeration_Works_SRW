@@ -40,7 +40,7 @@ public class Complaint {
     private String customerName;
 
     @NotNull(message="Contact number is required.") // Validation to ensure contact number is provided
-    @Pattern(regexp="^[0-9+]{10,13}$", message="Please enter a valid phone number (10-13 digits).") // Validation for contact number format
+    @Pattern(regexp="^[0-9+]{10,13}$", message="Please enter a valid phone number.") // Validation for contact number format
     @Column(name="contact_number") // Column mapping for the contact number
     private String contactNumber;
     
@@ -86,12 +86,14 @@ public class Complaint {
     private String closedAt;
 
     // Constructor with required fields to create a complaint
-    public Complaint(String customerName, String contactNumber, String email, String address, String serviceType, String description) {
+    public Complaint(String customerName, String contactNumber, String email, String address, String serviceType, String brand, String model, String description) {
         this.customerName = customerName;
         this.contactNumber = contactNumber;
         this.email = email;
         this.address = address;
         this.serviceType = serviceType;
+        this.brand = brand;
+        this.model = model;
         this.description = description;
     }
 }
