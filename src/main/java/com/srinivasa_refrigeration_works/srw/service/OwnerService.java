@@ -1,5 +1,7 @@
 package com.srinivasa_refrigeration_works.srw.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.srinivasa_refrigeration_works.srw.entity.Owner;
@@ -23,5 +25,10 @@ public class OwnerService {
         // Generate and set the Owner ID with the format "SRWxxx"
         owner.setOwnerId("SRW" + String.format("%03d", owner.getOwnerReference()));
         ownerRepository.save(owner); // Save the updated owner with the new ID
+    }
+    
+     // Retrieves all owners from the database
+    public List<Owner> getAllOwners() {
+        return ownerRepository.findAll();
     }
 }
