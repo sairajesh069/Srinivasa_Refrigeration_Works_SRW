@@ -31,5 +31,10 @@ public class ComplaintService {
     public List<Complaint> getComplaintsByUserId(String userId) {
         return complaintRepository.findAllByBookedById(userId); // Fetch complaints from the repository using userId
     }
+
+    // Retrieves all complaints from the database
+    public List<Complaint> getAllComplaints() {
+        return complaintRepository.findAll();
+    }
     
 }

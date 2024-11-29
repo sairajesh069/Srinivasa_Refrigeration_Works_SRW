@@ -130,5 +130,18 @@ public class ComplaintController {
         }
         return "complaint/complaint-list"; // Return the view for complaint status
     }
+
+    // Fetches and displays all the complaints registered
+    @GetMapping("/complaint/list")
+    public String getAllComplaints(Model model) {
+        List<Complaint> complaints = complaintService.getAllComplaints(); // Retrieve all complaints
+        if(complaints.isEmpty()) { // If no complaints are found, show a message
+            model.addAttribute("noRecordsFound", "No Complaint Entries in Database.");
+        }
+        else { // If complaints are found, add them to the model
+            model.addAttribute("complaints", complaints); // Add complaints to the model
+        }
+        return "complaint/complaint-list"; // Return the view for complaint status
+    } 
     
 }
