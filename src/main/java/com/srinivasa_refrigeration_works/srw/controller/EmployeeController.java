@@ -25,7 +25,11 @@ public class EmployeeController {
     @GetMapping("/list") // Maps the GET request for "/list" endpoint
     public String getAllEmployees(Model model) {
         List<Employee> employees = employeeService.getAllEmployees(); // Fetch all employees from the service
-        model.addAttribute("employees", employees); // Add the list of employees to the model
+        if(employees.isEmpty()) { // Check if the employees list is empty
+            model.addAttribute("noUsersFound", "No Employee Entries in Database"); // Add message if no employees are found
+        } else {
+            model.addAttribute("employees", employees); // Add the list of employees to the model
+        }
         return "employee/employee-list"; // Return the view for displaying the employee list
     }
 }

@@ -15,40 +15,48 @@
 
         <!-- Main heading for the page -->
         <h3>Employee List</h3>
+
+        <!-- Display a message if no employees are found -->
+        <p th:if="${noUsersFound}" th:text="${noUsersFound}"></p>
     
-        <!-- Table displaying the employee details -->
-        <table class="table table-bordered table-striped">
-            <!-- Table header section -->
-            <thead class="table-dark">
-                <tr>
-                    <th>Employee Id</th> <!-- Unique identifier for each employee -->
-                    <th>First Name</th> <!-- Employee's first name -->
-                    <th>Last Name</th> <!-- Employee's last name -->
-                    <th>Phone Number</th> <!-- Contact number of the employee -->
-                    <th>Email</th> <!-- Email address of the employee -->
-                    <th>Address</th> <!-- Residential address of the employee -->
-                    <th>Designation</th> <!-- Job title or role of the employee -->
-                    <th>Date of Hire</th> <!-- Date the employee joined -->
-                    <th>Salary</th> <!-- Employee's salary -->
-                    <th>Date of Exit</th> <!-- Date the employee left or employment status -->
-                </tr>
-            </thead>
-            <!-- Table body dynamically populated with employee data -->
-            <tbody>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.employeeId}"></td> <!-- Employee ID -->
-                    <td th:text="${employee.firstName}"></td> <!-- First Name -->
-                    <td th:text="${employee.lastName}"></td> <!-- Last Name -->
-                    <td th:text="${employee.phoneNumber}"></td> <!-- Phone Number -->
-                    <td th:text="${employee.email}"></td> <!-- Email -->
-                    <td th:text="${employee.address}"></td> <!-- Address -->
-                    <td th:text="${employee.designation}"></td> <!-- Designation -->
-                    <td th:text="${employee.dateOfHire}"></td> <!-- Hire Date -->
-                    <td th:text="${employee.salary}"></td> <!-- Salary -->
-                    <td th:text="${employee.dateOfExit != null ? employee.dateOfExit : 'Ongoing Employment'}"></td> <!-- Exit Date or employment status -->
-                </tr>
-            </tbody>
-        </table>
+        <!-- Display the employee table if employees exist -->
+        <div th:if="${employees}">
+
+            <!-- Table displaying the employee details -->
+            <table class="table table-bordered table-striped">
+                <!-- Table header section -->
+                <thead class="table-dark">
+                    <tr>
+                        <th>Employee Id</th> <!-- Unique identifier for each employee -->
+                        <th>First Name</th> <!-- Employee's first name -->
+                        <th>Last Name</th> <!-- Employee's last name -->
+                        <th>Phone Number</th> <!-- Contact number of the employee -->
+                        <th>Email</th> <!-- Email address of the employee -->
+                        <th>Address</th> <!-- Residential address of the employee -->
+                        <th>Designation</th> <!-- Job title or role of the employee -->
+                        <th>Date of Hire</th> <!-- Date the employee joined -->
+                        <th>Salary</th> <!-- Employee's salary -->
+                        <th>Date of Exit</th> <!-- Date the employee left or employment status -->
+                    </tr>
+                </thead>
+                <!-- Table body dynamically populated with employee data -->
+                <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.employeeId}"></td> <!-- Employee ID -->
+                        <td th:text="${employee.firstName}"></td> <!-- First Name -->
+                        <td th:text="${employee.lastName}"></td> <!-- Last Name -->
+                        <td th:text="${employee.phoneNumber}"></td> <!-- Phone Number -->
+                        <td th:text="${employee.email}"></td> <!-- Email -->
+                        <td th:text="${employee.address}"></td> <!-- Address -->
+                        <td th:text="${employee.designation}"></td> <!-- Designation -->
+                        <td th:text="${employee.dateOfHire}"></td> <!-- Hire Date -->
+                        <td th:text="${employee.salary}"></td> <!-- Salary -->
+                        <td th:text="${employee.dateOfExit != null ? employee.dateOfExit : 'Ongoing Employment'}"></td> <!-- Exit Date or employment status -->
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
     
         <!-- Button to navigate back to the home page -->
         <a th:href="@{/SRW/home}" class="btn btn-primary btn-sm mb-3">Back to home</a>

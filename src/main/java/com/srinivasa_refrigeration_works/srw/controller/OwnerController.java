@@ -25,7 +25,11 @@ public class OwnerController {
     @GetMapping("/list") // Maps the GET request for "/list" endpoint
     public String getAllOwners(Model model) {
         List<Owner> owners = ownerService.getAllOwners(); // Fetch all owners from the service
-        model.addAttribute("owners", owners); // Add the list of owners to the model
+        if(owners.isEmpty()) { // Check if the owner list is empty
+            model.addAttribute("noUsersFound", "No Owner Entries in Database"); // Add message if no owners are found
+        } else {
+            model.addAttribute("owners", owners); // Add the list of owners to the model
+        }
         return "owner/owner-list"; // Return the view for displaying the owner list
     }
 }

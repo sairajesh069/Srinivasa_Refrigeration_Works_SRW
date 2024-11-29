@@ -13,31 +13,39 @@
     <body>
         <h3>Owners List</h3>
 
-        <!-- Table to display the list of owners -->
-        <table class="table table-bordered table-striped">
-            <!-- Table header -->
-            <thead class="table-dark">
-                <tr>
-                    <th>Owner Id</th> <!-- Unique identifier for the owner -->
-                    <th>First Name</th> <!-- Owner's first name -->
-                    <th>Last Name</th> <!-- Owner's last name -->
-                    <th>Phone Number</th> <!-- Owner's contact number -->
-                    <th>Email</th> <!-- Owner's email address -->
-                    <th>Address</th> <!-- Owner's residential address -->
-                </tr>
-            </thead>
-            <!-- Table body dynamically populated with owner data -->
-            <tbody>
-                <tr th:each="owner : ${owners}">
-                    <td th:text="${owner.ownerId}"></td> <!-- Owner ID -->
-                    <td th:text="${owner.firstName}"></td> <!-- First Name -->
-                    <td th:text="${owner.lastName}"></td> <!-- Last Name -->
-                    <td th:text="${owner.phoneNumber}"></td> <!-- Phone Number -->
-                    <td th:text="${owner.email}"></td> <!-- Email Address -->
-                    <td th:text="${owner.address}"></td> <!-- Address -->
-                </tr>
-            </tbody>
-        </table>
+        <!-- Display a message if no owners are found -->
+        <p th:if="${noUsersFound}" th:text="${noUsersFound}"></p>
+
+        <!-- Display the owner table if owners exist -->
+        <div th:if="${owners}">
+
+            <!-- Table to display the list of owners -->
+            <table class="table table-bordered table-striped">
+                <!-- Table header -->
+                <thead class="table-dark">
+                    <tr>
+                        <th>Owner Id</th> <!-- Unique identifier for the owner -->
+                        <th>First Name</th> <!-- Owner's first name -->
+                        <th>Last Name</th> <!-- Owner's last name -->
+                        <th>Phone Number</th> <!-- Owner's contact number -->
+                        <th>Email</th> <!-- Owner's email address -->
+                        <th>Address</th> <!-- Owner's residential address -->
+                    </tr>
+                </thead>
+                <!-- Table body dynamically populated with owner data -->
+                <tbody>
+                    <tr th:each="owner : ${owners}">
+                        <td th:text="${owner.ownerId}"></td> <!-- Owner ID -->
+                        <td th:text="${owner.firstName}"></td> <!-- First Name -->
+                        <td th:text="${owner.lastName}"></td> <!-- Last Name -->
+                        <td th:text="${owner.phoneNumber}"></td> <!-- Phone Number -->
+                        <td th:text="${owner.email}"></td> <!-- Email Address -->
+                        <td th:text="${owner.address}"></td> <!-- Address -->
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
 
         <!-- Button to navigate back to the home page -->
         <a th:href="@{/SRW/home}" class="btn btn-primary btn-sm mb-3">Back to Home</a>
