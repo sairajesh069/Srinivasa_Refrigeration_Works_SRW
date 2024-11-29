@@ -81,5 +81,11 @@
 
                 <!-- Button to navigate back to the home page -->
                 <a th:href="@{/SRW/home}" class="btn btn-primary btn-sm mb-3">Back to Home</a>
+                
+                <!-- Check if user has the role 'OWNER' to display management portal -->
+                <div sec:authorize="hasRole('OWNER')">
+                        <!-- Button to navigate to management portal -->
+                        <a th:href="@{/SRW/management-portal}" class="btn btn-secondary btn-sm mb-3" title="management portal">Back to Management Portal</a>
+                </div>
         </body>
 </html>

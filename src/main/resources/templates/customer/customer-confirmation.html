@@ -21,7 +21,13 @@
         Thank you for choosing us. We wish you a wonderful day!</p> <br><br>
 
         <!-- Buttons to navigate back to login or home page -->
-        <a th:href="@{/SRW/customLogin}" class="btn btn-primary btn-sm mb-3" title="Go to Login page">Back to Login</a>
+        <a th:href="@{/SRW/login}" class="btn btn-primary btn-sm mb-3" title="Go to Login page">Back to Login</a>
         <a th:href="@{/SRW/home}" class="btn btn-secondary btn-sm mb-3" title="Return to Homepage">Back to Home</a>
+        
+        <!-- Check if user has the role 'OWNER' to display management portal -->
+        <div sec:authorize="hasRole('OWNER')">
+            <!-- Button to navigate to management portal -->
+            <a th:href="@{/SRW/management-portal}" class="btn btn-secondary btn-sm mb-3" title="management portal">Back to Management Portal</a>
+        </div>
     </body>
 </html>

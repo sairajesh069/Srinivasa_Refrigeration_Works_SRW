@@ -45,13 +45,13 @@ public class OwnerCredentialController {
         ownerCredential.setOwner(new Owner()); // Set up a new Owner entity
         ownerCredential.setUserCredential(new UserCredential()); // Set up a new UserCredential entity
         model.addAttribute("ownerCredential", ownerCredential); // Add to model for use in the view
-        return "owner/owner-creation-form"; // Returns the view name for the form
+        return "owner/owner-register-form"; // Returns the view name for the form
     }
 
     @PostMapping("/owner-confirmation") // Processes the owner and credential form submission
     public String confirmOwner(@ModelAttribute("ownerCredential") @Valid OwnerCredentialWrapper ownerCredential, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { // If validation errors exist, show the form again
-            return "owner/owner-creation-form";
+            return "owner/owner-register-form";
         }
         ownerService.addOwner(ownerCredential.getOwner()); // Add the Owner to the database
         String ownerId = ownerCredential.getOwner().getOwnerId(); // Get the owner's ID

@@ -47,14 +47,14 @@ public class EmployeeCredentialController {
         employeeCredential.setEmployee(new Employee());
         employeeCredential.setUserCredential(new UserCredential());
         model.addAttribute("employeeCredential", employeeCredential);
-        return "employee/employee-creation-form";
+        return "employee/employee-register-form";
     }
 
     // Confirms employee details and processes the submission
     @PostMapping("/employee-confirmation")
     public String confirmEmployee(@ModelAttribute("employeeCredential") @Valid EmployeeCredentialWrapper employeeCredential, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "employee/employee-creation-form"; // Return to form if there are errors
+            return "employee/employee-register-form"; // Return to form if there are errors
         }
         employeeService.addEmployee(employeeCredential.getEmployee()); // Save employee details
         String employeeId = employeeCredential.getEmployee().getEmployeeId(); // Get the employee's ID

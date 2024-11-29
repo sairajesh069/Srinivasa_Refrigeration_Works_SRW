@@ -58,7 +58,7 @@ public class CustomerCredentialController {
         model.addAttribute("customerCredential", customerCredential);
         
         // Return the registration form view
-        return "customer/customer-creation-form";
+        return "customer/customer-register-form";
     }
 
     // Handle customer form submission and create customer with credentials
@@ -66,7 +66,7 @@ public class CustomerCredentialController {
     public String confirmCustomer(@ModelAttribute("customerCredential") @Valid CustomerCredentialWrapper customerCredential, BindingResult bindingResult) {
         // Check for validation errors
         if(bindingResult.hasErrors()) {
-            return "customer/customer-creation-form"; // Return to form if there are errors
+            return "customer/customer-register-form"; // Return to form if there are errors
         }
 
         // Add customer to the database
