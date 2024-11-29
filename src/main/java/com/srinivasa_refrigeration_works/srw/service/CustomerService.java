@@ -1,5 +1,7 @@
 package com.srinivasa_refrigeration_works.srw.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.srinivasa_refrigeration_works.srw.entity.Customer;
@@ -30,5 +32,10 @@ public class CustomerService {
 
         // Save the updated customer object to include the generated ID
         customerRepository.save(customer);
+    }
+
+    // Retrieves all customers from the database
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 }
